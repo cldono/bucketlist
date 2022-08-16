@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 
 import { useOptionalUser } from "~/utils";
+import React from "react";
 
 export default function Index() {
   const user = useOptionalUser();
@@ -51,6 +52,14 @@ export default function Index() {
                     </Link>
                   </div>
                 )}
+              </div>
+              <div className="mx-auto mt-16 max-w-7xl text-center">
+                <Link
+                  to="/posts"
+                  className="text-xl text-blue-600 underline"
+                >
+                  Blog Posts
+                </Link>
               </div>
               <a href="https://remix.run">
                 <img
