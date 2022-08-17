@@ -9,3 +9,7 @@ export async function getAllEvents() {
 export async function createEvent(event) {
     return prisma.bucketListEvent.create({ data: event });
 }
+
+export async function getEvent(id: number) {
+    return prisma.bucketListEvent.findUnique({ where: { id } })
+}

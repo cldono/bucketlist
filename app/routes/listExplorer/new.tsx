@@ -1,15 +1,16 @@
-import { redirect } from "@remix-run/node";
+import { redirect, type ActionFunction } from "@remix-run/node";
 import * as React from "react";
 import { createEvent } from "~/models/listExplorer.server";
 import { Form} from "@remix-run/react";
+import { Link } from "@remix-run/react";
 
 import { Dialog, Transition } from '@headlessui/react'
 import Modal from "~/components/Modal";
 
-export const action = async ({ request }) => {
+export const action: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
-  
-    const name = formData.get("name");
+    
+    const name = request.action // formData.get("name");
     const state = formData.get("state");
     const country = formData.get("country");
     const notes = formData.get("notes");
@@ -66,13 +67,20 @@ export default function ListExploreNew() {
         </label>
         <textarea className={inputClass} name="notes" placeholder="And here's how I'll do it" rows={3}></textarea>
     </div>
-    <div className="text-right">
+    <div className="text-right flex justify-between">
+        <Link
+            to="/listExplorer"
+            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        >
+            Cancel
+        </Link>
         <button
         type="submit"
         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
         >
         Save
         </button>
+
     </div>
 </Form> 
     return(<Modal title="Add to your bucket list" isOpen={true} modalContent={form}/>)
