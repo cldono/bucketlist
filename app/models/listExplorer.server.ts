@@ -2,8 +2,14 @@ import { prisma } from "~/db.server";
 import type { BucketListEvent } from "@prisma/client";
 export type { BucketListEvent };
 
-export async function getAllEvents() {
-    return prisma.bucketListEvent.findMany();
+export async function getAllEvents(orderByCol: string, order: string) {
+    return prisma.bucketListEvent.findMany({
+        orderBy: [
+            {
+              [orderByCol]: order,
+            },
+          ],
+    });
 }
 
 export async function createEvent(event) {

@@ -1,16 +1,15 @@
 import { redirect, type ActionFunction } from "@remix-run/node";
-import * as React from "react";
 import { createEvent } from "~/models/listExplorer.server";
 import { Form} from "@remix-run/react";
 import { Link } from "@remix-run/react";
 
-import { Dialog, Transition } from '@headlessui/react'
+
 import Modal from "~/components/Modal";
 
 export const action: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
     
-    const name = request.action // formData.get("name");
+    const name = formData.get("name");
     const state = formData.get("state");
     const country = formData.get("country");
     const notes = formData.get("notes");
