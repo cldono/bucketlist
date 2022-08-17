@@ -1,8 +1,7 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, Outlet } from "@remix-run/react";
 import * as React from "react";
 import { json } from "@remix-run/node";
-import NewItemModal from "~/components/NewEventModal";
-import { getAllEvents } from "~/models/listExporer.server";
+import { getAllEvents } from "~/models/listExplorer.server";
 
 type LoaderData = {
     events: Awaited<ReturnType<typeof getAllEvents>>;
@@ -14,18 +13,8 @@ return json<LoaderData>({
 });
 };
 
-export default function Index() {
+export default function ListExplorer() {
     const { events } = useLoaderData() as LoaderData;
-    console.log("HERE IS EVENT DATA: ", events)
-
-    const [isOpen, setIsOpen] = React.useState(false)
-    function closeModal() {
-      setIsOpen(false)
-    }
-  
-    function openModal() {
-      setIsOpen(true)
-    }
 
   return (
     <div style={{height: '100%', width: '100%'}}>
@@ -37,9 +26,8 @@ export default function Index() {
                 </li>
             ))}
         </ul>
-        <button onClick={() => setIsOpen(true)}><h1>+</h1></button>
-        <NewItemModal isOpen={isOpen} setIsOpen={(isOpen) => {setIsOpen(isOpen)}}/>
-  
+        <Link to="new">Add to your bucket list</Link>
+        <Outlet/>
     </div>
   );
 }

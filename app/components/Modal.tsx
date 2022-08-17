@@ -1,24 +1,19 @@
 import * as React from "react";
 import { Dialog, Transition } from '@headlessui/react'
-import NewItemForm from "./NewEventForm"
 
 type Props = {
+    title: string;
     isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
+    setIsOpen?: (isOpen: boolean) => void;
+    onSubmit?: <E>(args: E) => void;
+    onCancel?: () => void;
+    modalContent: any;
 };
-export default function Modal({isOpen, setIsOpen}: Props) {
-  function closeModal() {
-    setIsOpen(false)
-  }
-
-  function openModal() {
-    setIsOpen(true)
-  }
-
+export default function Modal({title, isOpen, setIsOpen, onSubmit, onCancel, modalContent}: Props) {
   return (
     <main className="bg-blue-50">
       <Transition appear show={isOpen} as={React.Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={() => {setIsOpen ? setIsOpen(false) : console.log("close")}}>
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -47,26 +42,26 @@ export default function Modal({isOpen, setIsOpen}: Props) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Add new bucketlist item
+                    {title}
                   </Dialog.Title>
 
-                  <NewItemForm/>
+                  {modalContent}
 
                   <div className="mt-4 flex justify-between">
-                    <button
+                    {onCancel && <button
                         type="button"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={closeModal}
+                        onClick={onCancel}
                       >
                       Cancel
-                    </button>
-                    <button
+                    </button>}
+                    {onSubmit && <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      onClick={onSubmit}
                     >
                       Submit
-                    </button>
+                    </button>}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
