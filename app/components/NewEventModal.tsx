@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dialog, Transition } from '@headlessui/react'
-import NewItemForm from "./NewItemForm"
+import NewItemForm from "./NewEventForm"
 
 type Props = {
     isOpen: boolean;
@@ -49,7 +49,7 @@ export default function Modal({isOpen, setIsOpen}: Props) {
                   >
                     Add new bucketlist item
                   </Dialog.Title>
-                  
+
                   <NewItemForm/>
 
                   <div className="mt-4 flex justify-between">
