@@ -8,11 +8,11 @@ import Modal from "~/components/Modal";
 
 export const action: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
-    
-    const name = formData.get("name");
-    const state = formData.get("state");
-    const country = formData.get("country");
-    const notes = formData.get("notes");
+    let values  = Object.fromEntries(formData.entries())
+    const name = values.name
+    const state = values.state
+    const country = values.country
+    const notes = values.notes
 
     const dateStr = formData.get("date");
     let dateMonth = null;

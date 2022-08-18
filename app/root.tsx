@@ -1,6 +1,7 @@
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -36,6 +37,17 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
+        <ul className="flex bg-blue-200 py-5">
+          <li className="mr-6">
+            <Link className="text-blue-500 hover:text-blue-800" to="/">Home</Link>
+          </li>
+          <li className="mr-6">
+            <Link className="text-blue-500 hover:text-blue-800" to="/listExplorer">Your list</Link>
+          </li>
+          <li className="mr-6">
+            <Link className="text-blue-500 hover:text-blue-800" to="/listExplorer">Create events</Link>
+          </li>
+        </ul>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

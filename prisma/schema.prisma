@@ -53,6 +53,9 @@ model BucketListEvent {
   updatedAt    DateTime @updatedAt
 
   name  String
+  category String @default("Sightseeing")
+  completed Boolean @default(false)
+
   state String?
   country String?
   dateMonth Int?
