@@ -7,9 +7,9 @@ export async function getAllEvents(orderByCol: string, searchCol: string | nil, 
     const query = {
         orderBy: [
             {
-              [orderByCol]: "asc",
+                [orderByCol]: "asc",
             },
-          ],
+        ],
     }
 
     // if (searchCol && searchTerm) {

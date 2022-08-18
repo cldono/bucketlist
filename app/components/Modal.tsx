@@ -1,19 +1,32 @@
 import * as React from "react";
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition } from "@headlessui/react";
 
 type Props = {
-    title: string;
-    isOpen: boolean;
-    setIsOpen?: (isOpen: boolean) => void;
-    onSubmit?: <E>(args: E) => void;
-    onCancel?: () => void;
-    modalContent: any;
+  title: string;
+  isOpen: boolean;
+  setIsOpen?: (isOpen: boolean) => void;
+  onSubmit?: <E>(args: E) => void;
+  onCancel?: () => void;
+  modalContent: any;
 };
-export default function Modal({title, isOpen, setIsOpen, onSubmit, onCancel, modalContent}: Props) {
+export default function Modal({
+  title,
+  isOpen,
+  setIsOpen,
+  onSubmit,
+  onCancel,
+  modalContent,
+}: Props) {
   return (
     <main className="bg-blue-50">
       <Transition appear show={isOpen} as={React.Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => {setIsOpen ? setIsOpen(false) : console.log("close")}}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => {
+            setIsOpen ? setIsOpen(false) : console.log("close");
+          }}
+        >
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -48,27 +61,31 @@ export default function Modal({title, isOpen, setIsOpen, onSubmit, onCancel, mod
                   {modalContent}
 
                   <div className="mt-4 flex justify-between">
-                    {onCancel && <button
+                    {onCancel && (
+                      <button
                         type="button"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={onCancel}
                       >
-                      Cancel
-                    </button>}
-                    {onSubmit && <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={onSubmit}
-                    >
-                      Submit
-                    </button>}
+                        Cancel
+                      </button>
+                    )}
+                    {onSubmit && (
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={onSubmit}
+                      >
+                        Submit
+                      </button>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
           </div>
         </Dialog>
-      </Transition> 
+      </Transition>
     </main>
   );
 }
