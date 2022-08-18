@@ -1,9 +1,8 @@
 import { prisma } from "~/db.server";
 import type { BucketListEvent } from "@prisma/client";
-import { NavLinkProps } from "react-bootstrap";
 export type { BucketListEvent };
 
-export async function getAllEvents(orderByCol: string, searchCol: string | nil, searchTerm: string | nil) {
+export async function getAllEvents(orderByCol: string, searchCol: string | null, searchTerm: string | null) {
     const query = {
         orderBy: [
             {

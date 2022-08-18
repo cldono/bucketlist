@@ -1,6 +1,8 @@
 import { Form, useLoaderData } from "@remix-run/react";
 
-export const inputClass = `block tracking-wide text-gray-700 text-s mb-1`;
+export const buttonStyle =
+  "inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2";
+
 export function months() {
   return [
     "January",
@@ -17,6 +19,14 @@ export function months() {
     "December",
   ];
 }
+
+export const categoryOptions = [
+  "Music",
+  "Sightseeing",
+  "Food/Drink",
+  "Nature",
+  "Skills/Hobbies",
+];
 
 export function formatLocation(state: string | null, country: string | null) {
   if (state && country) {
@@ -75,7 +85,9 @@ export function renderCompletedForm(id: number, completed: boolean) {
         value={(!completed).toString()}
       ></input>
       <button type="submit" name="_action" value="toggleCompleted">
-        <text className={inputClass}>{completed ? "✅" : "❌"}</text>
+        <text className={`text-s mb-1 block tracking-wide text-gray-700`}>
+          {completed ? "✅" : "❌"}
+        </text>
       </button>
     </Form>
   );

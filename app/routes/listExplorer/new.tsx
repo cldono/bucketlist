@@ -2,28 +2,38 @@ import { redirect, type ActionFunction } from "@remix-run/node";
 import { createEvent } from "~/models/listExplorer.server";
 import { Form } from "@remix-run/react";
 import { Link } from "@remix-run/react";
-
+import { buttonStyle, categoryOptions } from "~/utils/helpers";
 import Modal from "~/components/Modal";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   let values = Object.fromEntries(formData.entries());
-  const name = values.name;
-  const state = values.state;
-  const country = values.country;
-  const notes = values.notes;
+
+  const name = values.name.toString();
+  const state = values.state.toString();
+  const country = values.country.toString();
+  const notes = values.notes.toString();
+  const category = values.category.toString();
 
   const dateStr = formData.get("date");
   let dateMonth = null;
   let dateYear = null;
 
   if (dateStr) {
-    const splitStr = dateStr.split("-");
+    const splitStr = dateStr.toString().split("-");
     dateYear = parseInt(splitStr[0]);
     dateMonth = parseInt(splitStr[1]);
   }
 
-  await createEvent({ name, state, country, dateMonth, dateYear, notes });
+  await createEvent({
+    name,
+    category,
+    state,
+    country,
+    dateMonth,
+    dateYear,
+    notes,
+  });
 
   return redirect("/listExplorer");
 };
@@ -63,9 +73,21 @@ export default function ListExploreNew() {
           />
         </div>
       </div>
-      <div>
-        <label className={labelClass}>Date</label>
-        <input className={inputClass} name="date" type="month"></input>
+      <div className="flex gap-1">
+        <div className="flex flex-col">
+          <label className={labelClass}>Date</label>
+          <input className={inputClass} name="date" type="month"></input>
+        </div>
+        <div className="flex flex-col">
+          <label className={labelClass}>Category</label>
+          <select name="category">
+            {categoryOptions.map((category) => (
+              <option className={inputClass} key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div>
         <label className={labelClass}>Details</label>
@@ -77,16 +99,10 @@ export default function ListExploreNew() {
         ></textarea>
       </div>
       <div className="flex justify-between text-right">
-        <Link
-          to="/listExplorer"
-          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-        >
+        <Link to="/listExplorer" className={buttonStyle}>
           Cancel
         </Link>
-        <button
-          type="submit"
-          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-        >
+        <button type="submit" className={buttonStyle}>
           Save
         </button>
       </div>

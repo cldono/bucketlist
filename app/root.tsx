@@ -23,32 +23,27 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const navLinkStyle = "text-slate-100 hover:text-blue-200";
   return (
     <html lang="en" className="h-full">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
-        <ul className="flex bg-blue-700 py-5">
-          <li className="mr-6">
-            <Link className="text-slate-100 hover:text-blue-800" to="/">
+      <body className="h-full font-medium">
+        <ul className="flex bg-teal-900 py-5">
+          <li className="mr-5 ml-2">
+            <Link className={navLinkStyle} to="/">
               Home
             </Link>
           </li>
           <li className="mr-6">
-            <Link
-              className="text-slate-100 hover:text-blue-800"
-              to="/listExplorer"
-            >
+            <Link className={navLinkStyle} to="/listExplorer">
               Your list
             </Link>
           </li>
           <li className="mr-6">
-            <Link
-              className="text-slate-100 hover:text-blue-800"
-              to="/listExplorer"
-            >
+            <Link className={navLinkStyle} to="/listExplorer">
               Create events
             </Link>
           </li>

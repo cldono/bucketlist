@@ -1,11 +1,9 @@
-import { marked } from "marked";
 import type { LoaderFunction, ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { Link } from "@remix-run/react";
 import {
-  inputClass,
   formatDate,
   formatLocation,
   renderCompletedForm,
@@ -40,40 +38,34 @@ export default function EventId() {
   const { event } = useLoaderData() as LoaderData;
 
   const labelClass = `block uppercase tracking-wide text-gray-700 text-s font-bold mb-1`;
-
-  //   const inputClass = `block w-full text-gray-700mb-3 leading-tight text-s`
-
+  const textClass = `block tracking-wide text-gray-700 text-s mb-1`;
   return (
-    <main className="mx-auto flex h-fit w-1/2 flex-col rounded bg-zinc-200 p-4">
+    <main className="mx-auto flex h-fit w-1/2 flex-col rounded bg-gray-50 p-4">
       <Link className="text-bold text-right" to="/listExplorer">
         X
       </Link>
       <h3 className="my-6 border-b-2 text-center text-2xl font-semibold">
         {event.name}
       </h3>
-      {/* <div className="flex gap-x-1">
-            <label className={labelClass}>Event: </label>
-            <text className={inputClass}>{event.name}</text>
-        </div> */}
       <div className="flex gap-x-1">
         <label className={labelClass}>Date: </label>
-        <text className={inputClass}>
+        <text className={textClass}>
           {formatDate(event.dateMonth, event.dateYear)}
         </text>
       </div>
       <div className="flex gap-x-1">
         <label className={labelClass}>Location: </label>
-        <text className={inputClass}>
+        <text className={textClass}>
           {formatLocation(event.state, event.country)}
         </text>
       </div>
       <div className="flex gap-x-1">
         <label className={labelClass}>Category: </label>
-        <text className={inputClass}>{event.category}</text>
+        <text className={textClass}>{event.category}</text>
       </div>
       <div className="flex gap-x-1">
         <label className={labelClass}>Details: </label>
-        <text className={inputClass}>{event.name}</text>
+        <text className={textClass}>{event.name}</text>
       </div>
       <div className="flex gap-x-1">
         <label className={labelClass}>Completed? </label>
