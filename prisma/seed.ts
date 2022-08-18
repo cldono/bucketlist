@@ -8,9 +8,11 @@ async function seed() {
 
   const bucketListEvents = [
     {
-      name: "Walk El camino de Santiago",
+      name: "Walk El camino de santiago",
       country: "Spain",
       dateMonth: 6,
+      dateYear: 2025,
+      category: "Nature"
     },
     {
       name: "Visit every state in the US",
@@ -26,6 +28,8 @@ async function seed() {
     },
     {
       name: "Win office trivia contest",
+      state: "Scranton",
+      country: "United States",
       notes: "preferably in Scranton, PA"
     }
   ]
