@@ -2,7 +2,10 @@ import { Form } from "@remix-run/react";
 import { Link } from "@remix-run/react";
 import { buttonStyle, categoryOptions } from "~/utils/helpers";
 
-export default function NewItemForm() {
+type Props = {
+  nameError: string | null;
+};
+export default function NewItemForm({ nameError }: Props) {
   const labelClass = `block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1`;
   const inputClass = `appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`;
 
@@ -16,6 +19,11 @@ export default function NewItemForm() {
           type="text"
           placeholder="Skydive"
         />
+        {nameError ? (
+          <em className="mb-3 rounded py-2 px-4 leading-tight text-red-600">
+            {nameError}
+          </em>
+        ) : null}
       </div>
       <div className="flex gap-1">
         <div className="flex flex-col">

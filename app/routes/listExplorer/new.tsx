@@ -1,8 +1,14 @@
-import { redirect, type ActionFunction } from "@remix-run/node";
+import {
+  redirect,
+  type ActionFunction,
+  type ActionData,
+  json,
+} from "@remix-run/node";
 import { createEvent } from "~/models/listExplorer.server";
-
+import invariant from "tiny-invariant";
 import Modal from "~/components/Modal";
 import NewItemForm from "~/components/NewItemForm";
+import { useActionData } from "@remix-run/react";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -24,6 +30,14 @@ export const action: ActionFunction = async ({ request }) => {
     dateMonth = parseInt(splitStr[1]);
   }
 
+  const errors: ActionData = {
+    name: name ? null : "Event name is required",
+  };
+  const hasErrors = Object.values(errors).some((errorMessage) => errorMessage);
+  if (hasErrors) {
+    return json<ActionData>(errors);
+  }
+
   await createEvent({
     name,
     category,
@@ -38,11 +52,13 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function ListExploreNew() {
+  const errors = useActionData();
+
   return (
     <Modal
       title="Add to your bucket list"
       isOpen={true}
-      modalContent={<NewItemForm />}
+      modalContent={<NewItemForm nameError={errors?.name} />}
     />
   );
 }

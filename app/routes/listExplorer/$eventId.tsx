@@ -15,10 +15,10 @@ import { getEvent, updateEventCompleted } from "~/models/listExplorer.server";
 type LoaderData = { event: BucketListEvent };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  invariant(params.eventId, `params.eventId is required`);
+  invariant(params.eventId, `Event ID is required`);
 
   const event = await getEvent(parseInt(params.eventId));
-  invariant(event, `Post not found: ${params.eventId}`);
+  invariant(event, `Event not found: ${params.eventId}`);
 
   return json<LoaderData>({ event });
 };

@@ -18,7 +18,7 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "Bucketlist App",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -40,11 +40,6 @@ export default function App() {
           <li className="mr-6">
             <Link className={navLinkStyle} to="/listExplorer">
               Your list
-            </Link>
-          </li>
-          <li className="mr-6">
-            <Link className={navLinkStyle} to="/listExplorer">
-              Create events
             </Link>
           </li>
         </ul>
